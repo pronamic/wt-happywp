@@ -84,15 +84,19 @@
 								<div class="info">
 									<?php
 
-									$price = get_post_meta( $post->ID, '_pronamic_extension_price', true );
-
-									$text = __( 'Free', 'robbery' );
-									if ( ! empty( $price ) ) {
-										$text = pronamic_wp_extension_format_price( $price );
+									$price      = get_post_meta( $post->ID, '_pronamic_extension_price', true );
+									$is_private = get_post_meta( $post->ID, '_pronamic_extension_is_private', true );
+									
+									$label = __( 'Free', 'robbery' );
+									
+									if ( $is_private ) {
+										$label = __( 'Private', 'robbery' );
+									} elseif ( ! empty( $price ) ) {
+										$label = pronamic_wp_extension_format_price( $price );
 									}
 
 									?>
-									<p class="h2"><?php echo $text; ?></p>
+									<p class="h2"><?php echo $label; ?></p>
 
 									<?php
 
