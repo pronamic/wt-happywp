@@ -302,7 +302,7 @@ add_filter( 'tiny_mce_before_init', 'robbery_set_mce_formats' );
 /**
  * Format price
  */
-function pronamic_wp_extension_format_price( $price ) {
+function happywp_format_price( $price ) {
 	$value = '&euro;' . number_format( $price, 2, ',', '.' );
 
 	$value = rtrim( rtrim( $value, '0' ), ',' );

@@ -92,7 +92,7 @@
 									if ( $is_private ) {
 										$label = __( 'Private', 'robbery' );
 									} elseif ( ! empty( $price ) ) {
-										$label = pronamic_wp_extension_format_price( $price );
+										$label = happywp_format_price( $price );
 									}
 
 									?>

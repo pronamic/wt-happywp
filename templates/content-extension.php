@@ -103,7 +103,7 @@ $extension = new Pronamic_WP_ExtensionsPlugin_ExtensionInfo( $post );
 					<?php if ( ! empty( $price ) ) : ?>
 
 						<dt><?php _e( 'Price', 'robbery' ); ?></dt>
-						<dd><?php echo pronamic_wp_extension_format_price( $price ); ?></dd>
+						<dd><?php echo happywp_format_price( $price ); ?></dd>
 
 					<?php endif; ?>
 
