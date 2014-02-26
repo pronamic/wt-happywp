@@ -4,6 +4,14 @@ global $post;
 
 $extension = new Pronamic_WP_ExtensionsPlugin_ExtensionInfo( $post );
 
+$version = $extension->get_version();
+$url     = $extension->get_download_link();
+
+$price         = get_post_meta( $post->ID, '_pronamic_extension_price', true );
+$is_private    = get_post_meta( $post->ID, '_pronamic_extension_is_private', true );
+$downloads     = get_post_meta( $post->ID, '_pronamic_extension_total_downloads', true );
+$date_modified = get_post_meta( $post->ID, '_pronamic_extension_date_modified', true );
+
 ?>
 
 <div class="row">
@@ -36,9 +44,14 @@ $extension = new Pronamic_WP_ExtensionsPlugin_ExtensionInfo( $post );
 					<li class="active" >
 						<a href="#description" data-toggle="tab"><?php _e( 'Description', 'robbery' ); ?></a>
 					</li>
-					<li>
-						<a href="#developers" data-toggle="tab"><?php _e( 'Developers', 'robbery' ); ?></a>
-					</li>
+					
+					<?php if ( empty( $price ) && ! $is_private ) : ?>
+
+						<li>
+							<a href="#developers" data-toggle="tab"><?php _e( 'Developers', 'robbery' ); ?></a>
+						</li>
+
+					<?php endif; ?>
 				</ul>
 			</div>
 
@@ -47,51 +60,48 @@ $extension = new Pronamic_WP_ExtensionsPlugin_ExtensionInfo( $post );
 					<?php the_content(); ?>
 				</div>
 
-				<div class="tab-pane" id="developers">
-					<?php get_template_part( 'templates/extension-developers' ); ?>
-				</div>
+				<?php if ( empty( $price ) && ! $is_private ) : ?>
+	
+					<div class="tab-pane" id="developers">
+						<?php get_template_part( 'templates/extension-developers' ); ?>
+					</div>
+
+				<?php endif; ?>
 			</div>
 		</article>
 	</div>
 
 	<div class="col-sm-3">
 		<aside>
-			<?php 
-		
-			$version = $extension->get_version();
-			$url     = $extension->get_download_link();
+			<?php if ( ! $is_private ) : ?>
 
-			$price         = get_post_meta( $post->ID, '_pronamic_extension_price', true );
-			$downloads     = get_post_meta( $post->ID, '_pronamic_extension_total_downloads', true );
-			$date_modified = get_post_meta( $post->ID, '_pronamic_extension_date_modified', true );
-
-			?>
-
-			<div class="panel">
-				<?php if ( empty( $price ) ) : ?>
-
-					<h3>
-						<?php _e( 'Download', 'robbery' ); ?>
-					</h3>
-
-					<a href="<?php echo esc_attr( $url ); ?>" class="btn btn-primary"><?php _e( 'Download', 'robbery' ); ?> <span itemprop="softwareVersion"><?php echo $version; ?></span></a>
-
-				<?php else : ?>
-
-					<?php
-
-					$url = get_post_meta( $post->ID, '_pronamic_extension_buy_url', true );
-
-					?>
-
-					<h3>
-						<?php _e( 'Buy Now', 'robbery' ); ?>
-					</h3>
-
-					<a href="<?php echo esc_attr( $url ); ?>" class="btn btn-success btn-lg"><?php _e( 'Buy', 'robbery' ); ?></a>
-
-				<?php endif; ?>
-			</div>
+				<div class="panel">
+					<?php if ( empty( $price ) ) : ?>
+	
+						<h3>
+							<?php _e( 'Download', 'robbery' ); ?>
+						</h3>
+	
+						<a href="<?php echo esc_attr( $url ); ?>" class="btn btn-primary"><?php _e( 'Download', 'robbery' ); ?> <span itemprop="softwareVersion"><?php echo $version; ?></span></a>
+	
+					<?php else : ?>
+	
+						<?php
+	
+						$url = get_post_meta( $post->ID, '_pronamic_extension_buy_url', true );
+	
+						?>
+	
+						<h3>
+							<?php _e( 'Buy Now', 'robbery' ); ?>
+						</h3>
+	
+						<a href="<?php echo esc_attr( $url ); ?>" class="btn btn-success btn-lg"><?php _e( 'Buy', 'robbery' ); ?></a>
+	
+					<?php endif; ?>
+				</div>
+			
+			<?php endif; ?>
 
 			<div class="panel">
 				<h3>
