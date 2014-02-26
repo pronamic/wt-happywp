@@ -1,0 +1,37 @@
+/*
+Theme Name: Pronamic
+Description: Used to style the TinyMCE editor.
+*/
+
+/* Tables */
+table {
+	width: 100%;
+}
+
+/* Global */
+p.lead {
+	font-size: 20px;
+
+	line-height: 1.4;
+}
+
+/* Buttons */
+a.btn {
+	background: #0088cc;
+
+	color: #fff;
+
+	display: inline-block;
+
+	padding: 5px 20px;
+
+	text-decoration: none;
+}
+
+a.btn.alt {
+	background: #88cc00;
+}
+
+.h1 { font-size: 30px; }
+.h2 { font-size: 26px; }
+.h3 { font-size: 20px; }
